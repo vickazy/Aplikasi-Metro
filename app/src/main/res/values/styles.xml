@@ -1,20 +1,66 @@
 <resources>
-
-    <!-- Base application theme. -->
+    <!-- Default Theme-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#EC3D33</item>
-        <item name="colorPrimaryDark">#234990</item>
-        <item name="colorAccent">#F5B12E</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
+    <!-- Main Activity Theme-->
+    <style name="AppTheme.MainActivity">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+    </style>
+
+    <!-- No Action Bar Theme-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+    </style>
+
+    <!-- View Form Detail Theme-->
+    <style name="AppTheme.ViewFormDetail">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+    </style>
+
+    <!-- View Image Theme-->
+    <style name="AppTheme.ViewImage">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Splash Screen Theme-->
+    <style name="AppTheme.Splashscreen" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="CollapsingtoolbarTitleExpanded">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+    </style>
+
+    <style name="CollapsingtoolbarTitleCollapsed">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+    </style>
+
+    <style name="ToolbarLight" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
 </resources>

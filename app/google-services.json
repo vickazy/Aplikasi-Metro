@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "271592153667-tee4uvjhfm0iil5qt279e3msddkk51nl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jojo.metroapp",
+            "certificate_hash": "880993242eb1c8f7604ac9c2fdacd7a55d76367c"
+          }
+        },
+        {
           "client_id": "271592153667-3o0qqlk40hb2j2h77oho3k43qjqcvq13.apps.googleusercontent.com",
           "client_type": 3
         }
