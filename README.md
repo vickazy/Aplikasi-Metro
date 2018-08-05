@@ -2,7 +2,7 @@
 Aplikasi perizinan dengan implementasi Firebase.<br>
 <b>maintained by [@ezralazuardy](https://github.com/ezralazuardy) & [@taiga48](https://github.com/taiga48).</b>
 
-<b>Install aplikasi langsung di perangkatmu, download [disini.](https://github.com/ezralazuardy/Aplikasi-Metro/raw/master/apk/app-debug.apk) (<i>versi 1.0 - Alpha</i>)</b>
+<b>Install aplikasi langsung di perangkatmu, download file .APK [disini.](https://github.com/ezralazuardy/Aplikasi-Metro/raw/master/apk/app-debug.apk) (<i>versi 1.0 - Alpha</i>)</b>
 
 ### Fitur aplikasi
 - Login & Sign Up (Custom Account)
