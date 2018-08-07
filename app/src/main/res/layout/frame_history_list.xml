@@ -5,41 +5,105 @@
     android:id="@+id/frameHistoryList"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="@android:color/white"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
-    <ImageView
-        android:id="@+id/frameHistoryListImage"
-        android:layout_width="76dp"
-        android:layout_height="76dp"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center|start"
-        tools:ignore="ContentDescription" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:orientation="vertical"
-        android:layout_gravity="center|end">
-        <TextView
-            android:id="@+id/frameHistoryListTitle"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/frameHistoryListImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center|start"
+            tools:ignore="ContentDescription" />
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"/>
-        <TextView
-            android:id="@+id/frameHistoryListDatePublished"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            android:layout_marginTop="6dp"/>
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:orientation="vertical"
+            android:layout_gravity="center|end">
+            <TextView
+                android:id="@+id/frameHistoryListTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/black"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="18sp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/frameHistoryListDatePublished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="6dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp"
+                    android:text="-"
+                    android:layout_marginEnd="6dp"
+                    tools:ignore="HardcodedText" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/frameHistoryListStatusUnconfirmed"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/materialRed"
+                        android:textSize="14sp"
+                        android:text="Belum dikonfirmasi"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/frameHistoryListStatusCanceled"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/materialRed"
+                        android:textSize="14sp"
+                        android:text="Dibatalkan"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/frameHistoryListStatusConfirmed"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/materialGreen"
+                        android:textSize="14sp"
+                        android:text="Dikonfirmasi"
+                        tools:ignore="HardcodedText" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@android:color/darker_gray" />
 </LinearLayout>

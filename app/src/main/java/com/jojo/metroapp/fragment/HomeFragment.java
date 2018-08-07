@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment {
                 Objects.requireNonNull(getContext()).startActivity(new Intent(getContext(), PengajuanIzinActivity.class));
             }
         });
+
         btnRiwayat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

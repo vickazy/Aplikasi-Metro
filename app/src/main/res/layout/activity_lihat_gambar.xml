@@ -6,8 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.RiwayatActivity">
-    <ImageView
+    <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/image_activityLihatGambar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"

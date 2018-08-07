@@ -18,18 +18,21 @@ public class config {
 
     // Activity request code
     public static final int RC_PICK_IMAGE = 1;
+    public static final int RC_ACTIVITYFORM_STATUS = 2;
 
     // Bundle Key
     public static final String BK_IMAGE_URL_FORM = "imageUrlForm";
     public static final String BK_TITLE_FORM = "titleForm";
-    public static final String BK_ALASAN_FORM = "alasanForm";
+    public static final String BK_DESKRIPSI_FORM = "alasanForm";
     public static final String BK_DATE_PUBLISHED_FORM = "publishedDateForm";
     public static final String BK_DATE_DARI_FORM = "dateDari";
     public static final String BK_DATE_SAMPAI_FORM = "dateSampai";
     public static final String BK_USERNAME_FORM = "usernameForm";
     public static final String BK_STATUS_FORM = "statusForm";
+    public static final String BK_NUMBER_FORM = "numberForm";
     public static final String BK_STATUS_CONFIRMED_FORM = "confirmed";
     public static final String BK_STATUS_UNCONFIRMED_FORM = "unconfirmed";
+    public static final String BK_STATUS_CANCELED_FORM = "canceled";
     public static final String BK_IMAGE_PATH_ACTIVITY_LIHAT_GAMBAR = "imagePathActivityLihatGambar";
     public static final String BK_IMAGE_TYPE_ACTIVITY_LIHAT_GAMBAR = "imageTypeActivityLihatGambar";
     public static final int BK_IMAGE_URI_TYPE_ACTIVITY_LIHAT_GAMBAR = 0;

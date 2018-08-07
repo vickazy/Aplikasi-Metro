@@ -5,18 +5,18 @@ public class FormModel {
     private String formNumber;
     private String username;
     private String titleForm;
-    private String alasan;
+    private String deskripsi;
     private String dateDari;
     private String dateSampai;
     private String imageUrl;
     private String datePublished;
     private String status;
 
-    public FormModel(String formNumber, String username, String titleForm, String alasan, String dateDari, String dateSampai, String imageUrl, String datePublished, String status) {
+    public FormModel(String formNumber, String username, String titleForm, String deskripsi, String dateDari, String dateSampai, String imageUrl, String datePublished, String status) {
         this.formNumber = formNumber;
         this.username = username;
         this.titleForm = titleForm;
-        this.alasan = alasan;
+        this.deskripsi = deskripsi;
         this.dateDari = dateDari;
         this.dateSampai = dateSampai;
         this.imageUrl = imageUrl;
@@ -48,12 +48,12 @@ public class FormModel {
         this.titleForm = titleForm;
     }
 
-    public String getAlasan() {
-        return alasan;
+    public String getDeskripsi() {
+        return deskripsi;
     }
 
-    public void setAlasan(String alasan) {
-        this.alasan = alasan;
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
     }
 
     public String getDateDari() {

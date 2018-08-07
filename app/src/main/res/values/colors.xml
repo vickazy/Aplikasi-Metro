@@ -5,4 +5,9 @@
     <color name="colorAccent">#F5B12E</color>
 
     <color name="windowBackground">#dadada</color>
+    <color name="fontWhite">#ffffff</color>
+    <color name="fontBlack">#232323</color>
+    <color name="fontGray">#757575</color>
+    <color name="materialGreen">#5db64b</color>
+    <color name="materialRed">#e14c4c</color>
 </resources>

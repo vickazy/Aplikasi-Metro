@@ -46,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:enabled="false"
                 android:layout_gravity="start|center"
                 android:id="@+id/edtDari"
                 android:layout_width="match_parent"
@@ -82,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:enabled="false"
                 android:layout_gravity="start|center"
                 android:id="@+id/edtSampai"
                 android:layout_width="match_parent"

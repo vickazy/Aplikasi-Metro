@@ -49,6 +49,7 @@ import static com.jojo.metroapp.config.config.DB_USER_ACCOUNT_INFORMATION;
 import static com.jojo.metroapp.config.config.RC_PICK_IMAGE;
 import static com.jojo.metroapp.utils.utils.setFormMap;
 import static com.jojo.metroapp.utils.utils.setPublicFormGeneralSettings;
+import static com.jojo.metroapp.utils.utils.setPublicFormMap;
 import static com.jojo.metroapp.utils.utils.toast;
 
 public class PengajuanIzinActivity extends AppCompatActivity {
@@ -58,13 +59,15 @@ public class PengajuanIzinActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private StorageReference storageReference;
 
-    private String username, title, alasan, dateDari, dateSampai;
+    private String username, title, deskripsi, dateDari, dateSampai;
     private Uri imageFilePath;
     private ImageView gambarIzin;
     private LinearLayout frameBtnAturGambar;
     private AppCompatButton btnAmbilGambar;
     private int dayDari, monthDari, yearDari, daySampai, monthSampai, yearSampai;
     private ProgressDialog progressDialog;
+    private EditText edtTitle, edtAlasan;
+    private FrameLayout btnKirimPermohonan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,21 +85,22 @@ public class PengajuanIzinActivity extends AppCompatActivity {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
 
-        getUsername();
-
         // UI Component
-        final EditText edtTitle = findViewById(R.id.edtTitle);
-        final EditText edtAlasan = findViewById(R.id.edtAlasan);
+        edtTitle = findViewById(R.id.edtTitle);
+        edtAlasan = findViewById(R.id.edtAlasan);
         final EditText edtDari = findViewById(R.id.edtDari);
         final EditText edtSampai = findViewById(R.id.edtSampai);
         FrameLayout btnDateDari = findViewById(R.id.btnDateDari);
         FrameLayout btnDateSampai = findViewById(R.id.btnDateSampai);
-        FrameLayout btnKirimPermohonan = findViewById(R.id.btnKirimPermohonan);
+        btnKirimPermohonan = findViewById(R.id.btnKirimPermohonan);
         btnAmbilGambar = findViewById(R.id.btnAmbilGambar);
         AppCompatButton btnEditGambar = findViewById(R.id.btnEditGambar);
         AppCompatButton btnLihatGambar = findViewById(R.id.btnLihatGambar);
         frameBtnAturGambar = findViewById(R.id.frameBtnAturGambar);
         gambarIzin = findViewById(R.id.gambarIzin);
+
+        // get username
+        getUsername();
 
         // Set On Click Listener
         btnDateDari.setOnClickListener(new View.OnClickListener() {
@@ -167,30 +171,6 @@ public class PengajuanIzinActivity extends AppCompatActivity {
                 lihatGambar();
             }
         });
-
-        btnKirimPermohonan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                title = edtTitle.getText().toString();
-                alasan = edtAlasan.getText().toString();
-                idFactory();
-                if (formIsNotEmpty(title, alasan, dateDari, dateSampai, imageFilePath)) {
-                    uploadImageToDatabase();
-                } else {
-                    if (title.isEmpty()) {
-                        toast(getApplicationContext(), "Mohon isi judul absensi");
-                    } else if (alasan.isEmpty()) {
-                        toast(getApplicationContext(), "Mohon isi alasan absensi");
-                    } else if (dateDari.isEmpty()) {
-                        toast(getApplicationContext(), "Mohon isi tanggal mulainya izin");
-                    } else if (dateSampai.isEmpty()) {
-                        toast(getApplicationContext(), "Mohon isi tanggal berakhirnya izin");
-                    } else if (imageFilePath == null || imageFilePath.equals(Uri.EMPTY)) {
-                        toast(getApplicationContext(), "Mohon sisipkan gambar surat izin");
-                    }
-                }
-            }
-        });
     }
 
     private String idFactory() {
@@ -199,28 +179,66 @@ public class PengajuanIzinActivity extends AppCompatActivity {
 
     private void getUsername() {
         if (firebaseAuth.getCurrentUser() != null) {
-            firebaseFirestore.collection(DB_USER_ACCOUNT_INFORMATION).document(firebaseAuth.getCurrentUser().getUid()).
-            get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            firebaseFirestore
+                    .collection(DB_USER_ACCOUNT_INFORMATION)
+                    .document(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()))
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot documentSnapshot = task.getResult();
                         if (documentSnapshot.exists()) {
                             username = documentSnapshot.getString("username");
+                            btnKirimPermohonan.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    title = edtTitle.getText().toString();
+                                    deskripsi = edtAlasan.getText().toString();
+                                    idFactory();
+                                    if (formIsNotEmpty(title, deskripsi, dateDari, dateSampai, imageFilePath)) {
+                                        uploadImageToDatabase();
+                                    } else {
+                                        if (title.isEmpty()) {
+                                            toast(getApplicationContext(), "Mohon isi judul absensi");
+                                        } else if (deskripsi.isEmpty()) {
+                                            toast(getApplicationContext(), "Mohon isi deskripsi absensi");
+                                        } else if (dateDari.isEmpty()) {
+                                            toast(getApplicationContext(), "Mohon isi tanggal mulainya izin");
+                                        } else if (dateSampai.isEmpty()) {
+                                            toast(getApplicationContext(), "Mohon isi tanggal berakhirnya izin");
+                                        } else if (imageFilePath == null || imageFilePath.equals(Uri.EMPTY)) {
+                                            toast(getApplicationContext(), "Mohon sisipkan gambar surat izin");
+                                        }
+                                    }
+                                }
+                            });
+                        } else {
+                            toast(getApplicationContext(), "Tidak dapat mendapatkan nama pengguna anda");
+                            finish();
                         }
                     }
-                }
-            });
+                }})
+                .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    toast(getApplicationContext(), "Tidak dapat mendapatkan nama pengguna anda");
+                    finish();
+                }});
+        } else {
+            toast(getApplicationContext(), "Tidak dapat mendapatkan nama pengguna anda");
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finishAffinity();
         }
     }
 
     private String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
+        return calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR);
     }
 
-    private boolean formIsNotEmpty(String title, String alasan, String dateDari, String dateSampai, Uri imageUri) {
-        return title != null && !title.isEmpty() && alasan != null && !alasan.isEmpty() && dateDari != null && !dateDari.isEmpty() && dateSampai != null && !dateSampai.isEmpty() && imageUri != null;
+    private boolean formIsNotEmpty(String title, String deskripsi, String dateDari, String dateSampai, Uri imageUri) {
+        return title != null && !title.isEmpty() && deskripsi != null && !deskripsi.isEmpty() && dateDari != null && !dateDari.isEmpty() && dateSampai != null && !dateSampai.isEmpty() && imageUri != null;
     }
 
     private void setDialog() {
@@ -228,6 +246,7 @@ public class PengajuanIzinActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
     }
+
     private void uploadImageToDatabase() {
         if(imageFilePath != null && !imageFilePath.equals(Uri.EMPTY)) {
             progressDialog.setTitle("Mengunggah gambar");
@@ -247,7 +266,7 @@ public class PengajuanIzinActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
-                                sendFormToDatabase(title, alasan, dateDari, dateSampai, task.getResult().toString());
+                                sendFormToDatabase(title, deskripsi, dateDari, dateSampai, task.getResult().toString());
                             } else {
                                 progressDialog.dismiss();
                                 toast(getApplicationContext(), "Terjadi kesalahan saat mendapatkan url gambar");
@@ -264,8 +283,8 @@ public class PengajuanIzinActivity extends AppCompatActivity {
         }
     }
 
-    private void sendFormToDatabase(final String title, final String alasan, final String dateDari, final String dateSampai, final String imageUrl) {
-        progressDialog.setTitle("Menunggah formulir");
+    private void sendFormToDatabase(final String title, final String deskripsi, final String dateDari, final String dateSampai, final String imageUrl) {
+        progressDialog.setTitle("Mengunggah formulir");
         progressDialog.setMessage("Sedang mengunggah formulir pengajuan absensi");
         final String currentDate = getCurrentDate();
         if (firebaseAuth.getCurrentUser() != null) {
@@ -286,14 +305,14 @@ public class PengajuanIzinActivity extends AppCompatActivity {
                         // Send to public
                         firebaseFirestore.collection(DB_PUBLIC_FORM)
                                 .document(String.valueOf(newFormNumber) + "-" + firebaseAuth.getCurrentUser().getUid())
-                                .set(setFormMap(
+                                .set(setPublicFormMap(
                                         String.valueOf(newFormNumber),
                                         firebaseAuth.getCurrentUser().getEmail(),
                                         username,
                                         firebaseAuth.getCurrentUser().getUid(),
                                         currentDate,
                                         title,
-                                        alasan,
+                                        deskripsi,
                                         dateDari,
                                         dateSampai,
                                         imageUrl,
@@ -313,7 +332,7 @@ public class PengajuanIzinActivity extends AppCompatActivity {
                                                         firebaseAuth.getCurrentUser().getUid(),
                                                         currentDate,
                                                         title,
-                                                        alasan,
+                                                        deskripsi,
                                                         dateDari,
                                                         dateSampai,
                                                         imageUrl,
@@ -378,7 +397,7 @@ public class PengajuanIzinActivity extends AppCompatActivity {
             });
         } else {
             progressDialog.dismiss();
-            toast(getApplicationContext(), "Telah terjadi kesalahan tak terduga!");
+            toast(getApplicationContext(), "Telah terjadi kesalahan saat menghubungi server");
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finishAffinity();
         }

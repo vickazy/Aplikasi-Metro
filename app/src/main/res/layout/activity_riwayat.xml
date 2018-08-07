@@ -18,6 +18,7 @@
         android:visibility="gone"/>
     <LinearLayout
         android:id="@+id/placeholderNoRiwayat"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -28,7 +29,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_history_black"
+            android:src="@mipmap/ic_nohistory_black"
             tools:ignore="ContentDescription" />
         <TextView
             android:layout_width="wrap_content"
@@ -49,6 +50,78 @@
             android:textColor="#4d4d4d"
             android:fontFamily="@font/nunito_semibold"
             android:text="Lakukan sesuatu di Metro App dan kami akan menampilkan riwayat aktifitas untuk anda."
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/placeholderLoadRiwayat"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_margin="40dp">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_loadhistory_black"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Mohon tunggu"
+            tools:ignore="HardcodedText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="#4d4d4d"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="Sedang mengambil daftar riwayat aktifitas anda."
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/placeholderLoadRiwayatError"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_margin="40dp">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_loadhistoryerror_black"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Terjadi kesalahan"
+            tools:ignore="HardcodedText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="#4d4d4d"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="Kami tidak dapat mengambil daftar riwayat aktifitas dari server kami. Pastikan anda mengaktifkan koneksi Internet di perangkat ini."
             tools:ignore="HardcodedText" />
     </LinearLayout>
 </FrameLayout>
