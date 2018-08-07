@@ -11,7 +11,8 @@ Aplikasi perizinan dengan implementasi Firebase,<br>
 - Upload data ke Firebase Realtime Database
 - Riwayat aktivitas pengguna
 - Implementasi status izin (Confirmed / Unconfirmed / Canceled)
-- Deskripsi profil akun
+- Informasi akun
+- Deskripsi profil pengguna
 - Foto profil akun
 - Zoom gambar
 - Animasi gambar
