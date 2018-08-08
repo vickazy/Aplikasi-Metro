@@ -40,6 +40,7 @@ import static com.jojo.metroapp.config.config.BK_TITLE_FORM;
 import static com.jojo.metroapp.config.config.DB_PUBLIC_FORM;
 import static com.jojo.metroapp.config.config.DB_USER_ACCOUNT_HISTORY;
 import static com.jojo.metroapp.config.config.DB_USER_ACCOUNT_INFORMATION;
+import static com.jojo.metroapp.utils.utils.removeImageWithGlide;
 import static com.jojo.metroapp.utils.utils.setCancelForm;
 import static com.jojo.metroapp.utils.utils.setImageWithGlide;
 import static com.jojo.metroapp.utils.utils.toast;
@@ -265,5 +266,15 @@ public class DetailFormUserActivity extends AppCompatActivity {
                 break;
         }
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        removeImageWithGlide(getApplicationContext(), imageView);
+        imageView.destroyDrawingCache();
+        imageView.setImageDrawable(null);
+        progressDialog.cancel();
+        progressDialog = null;
     }
 }

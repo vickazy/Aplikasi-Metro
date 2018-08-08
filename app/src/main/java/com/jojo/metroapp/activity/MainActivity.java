@@ -1,14 +1,19 @@
 package com.jojo.metroapp.activity;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.jojo.metroapp.R;
 import com.jojo.metroapp.fragment.HomeFragment;
@@ -22,7 +27,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ProfileFragment profileFragment;
     private LogoutFragment logoutFragment;
     private int fragmentPosition = 0;
+    private View dialogAboutApp;
+    private AlertDialog.Builder alertDialogAbout;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +43,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        dialogAboutApp = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_about_app, null);
+        alertDialogAbout = new AlertDialog
+                .Builder(MainActivity.this)
+                .setIcon(null)
+                .setCancelable(true)
+                .setTitle("About")
+                .setView(dialogAboutApp)
+                .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -112,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             hideFragment(homeFragment);
             hideFragment(profileFragment);
             fragmentPosition = 2;
+        } else if (id == R.id.nav_about) {
+            alertDialogAbout.show();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

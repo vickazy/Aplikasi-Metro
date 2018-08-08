@@ -47,6 +47,7 @@ import static com.jojo.metroapp.config.config.DB_PUBLIC_FORM_SETTINGS;
 import static com.jojo.metroapp.config.config.DB_USER_ACCOUNT_HISTORY;
 import static com.jojo.metroapp.config.config.DB_USER_ACCOUNT_INFORMATION;
 import static com.jojo.metroapp.config.config.RC_PICK_IMAGE;
+import static com.jojo.metroapp.utils.utils.idFactory;
 import static com.jojo.metroapp.utils.utils.setFormMap;
 import static com.jojo.metroapp.utils.utils.setPublicFormGeneralSettings;
 import static com.jojo.metroapp.utils.utils.setPublicFormMap;
@@ -171,10 +172,6 @@ public class PengajuanIzinActivity extends AppCompatActivity {
                 lihatGambar();
             }
         });
-    }
-
-    private String idFactory() {
-        return UUID.randomUUID().toString();
     }
 
     private void getUsername() {

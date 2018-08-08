@@ -18,7 +18,8 @@ public class config {
 
     // Activity request code
     public static final int RC_PICK_IMAGE = 1;
-    public static final int RC_ACTIVITYFORM_STATUS = 2;
+    public static final int RC_PICK_IMAGE_PROFILE = 2;
+    public static final int RC_ACTIVITYFORM_STATUS = 3;
 
     // Bundle Key
     public static final String BK_IMAGE_URL_FORM = "imageUrlForm";

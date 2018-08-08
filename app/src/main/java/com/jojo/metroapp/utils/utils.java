@@ -1,6 +1,7 @@
 package com.jojo.metroapp.utils;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.jojo.metroapp.R;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.jojo.metroapp.config.config.DB_PUBLIC_FORM_GENERAL_SETTINGS_TOTAL_FORM;
 
@@ -130,5 +132,45 @@ public class utils extends AppGlideModule {
                         .into(imageView);
                 break;
         }
+    }
+
+    public static void setImageWithGlideFromLocal(Context context, ImageView imageView, int img, int type) {
+        switch (type) {
+            // regular
+            case 0:
+                GlideApp.with(context)
+                        .load(img)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(imageView);
+                break;
+            // center crop
+            case 1:
+                GlideApp.with(context)
+                        .load(img)
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(imageView);
+                break;
+            // fit center
+            case 2:
+                GlideApp.with(context)
+                        .load(img)
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(imageView);
+                break;
+        }
+    }
+
+    public static void removeImageWithGlide(Context context, View v) {
+        GlideApp.with(context)
+                .clear(v);
+    }
+
+    public static String idFactory() {
+        return UUID.randomUUID().toString();
     }
 }
